@@ -1,4 +1,5 @@
 source "http://rubygems.org"
 #gem "nokogiri"
 #gem "rack", "~>1.1"
+gem "ruby-debug19"
 gem "rspec", :require => "spec"
