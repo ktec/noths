@@ -9,6 +9,17 @@ module CheckoutSpecHelper
       double(003, :name => "Kids T-shirt", :price => 19.95 )
     ]
   end
+  def discount1
+    PromotionalRule.new("over_60_pounts") do |items|
+      # 10% if total is greater than £60
+      total = items.inject(0){|sum,item| sum + item.price}
+      if total > 60
+        discount = total/100 * 10
+      else
+        discount = 0
+      end
+    end
+  end
 end
 
 describe Checkout, '#total' do
@@ -38,8 +49,8 @@ describe Checkout, '#total' do
   end
   context "with discounted prices" do
     let(:promotional_rules) { [
-        #PromotionalRule.new()
-        ] }
+      discount1
+      ] }
     let(:checkout) { Checkout.new(catalogue,promotional_rules) }
     it "returns correct price for one item" do
       item1,item2,item3 = catalogue

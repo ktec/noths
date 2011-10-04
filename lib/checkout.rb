@@ -7,15 +7,15 @@ class Checkout
     items << item
   end
   def total
-    t = items.inject(0){|sum,item| sum + item.price}
+    total = items.inject(0){|sum,item| sum + item.price}
     ## apply discount rules
-    #@promotional_rules.each do |items|
-    #  t += rule.apply_discount(items)
-    #end
+    @promotional_rules.each do |rule|
+      total += rule.get_discount(items)
+    end
+    total
   end
   private
     def items
       @items ||= []
     end
-  #http://stackoverflow.com/questions/2625749/calculate-sum-of-objects-for-each-unique-object-property-in-ruby
 end

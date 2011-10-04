@@ -1,8 +1,8 @@
 class PromotionalRule
-  def initialize(discount)
-    @discount = discount
+  def initialize(name, &block)
+    @name, @block = name, block
   end
-  def apply_discount(items)
-    #@discount items
+  def get_discount(items)
+    @block.call(items)
   end
 end
