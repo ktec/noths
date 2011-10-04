@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/spec_helper'
-require 'ruby-debug'
 
 module CheckoutSpecHelper
+  # define a product class
   class Product
     def initialize ( id, name, price ) 
       @id = id
@@ -10,11 +10,12 @@ module CheckoutSpecHelper
     end
     attr_accessor :id, :name, :price
   end
+  # define the product catalogue
   def catalogue
     @catalogue ||= [
-      Product.new("001", "Lavender heart", 9.25 ),
-      Product.new("002", "Personalised cufflinks", 45.00 ),
-      Product.new("003", "Kids T-shirt", 19.95 )
+      Product.new( "001", "Lavender heart", 9.25 ),
+      Product.new( "002", "Personalised cufflinks", 45.00 ),
+      Product.new( "003", "Kids T-shirt", 19.95 )
     ]
   end
   # If you spend over £60, then you get 10% off your purchase 
@@ -94,10 +95,8 @@ describe Checkout, '#total' do
     # Total price expected: £58.46
 
     it "returns correct price for two items" do
-      basket = [@item2,@item3]
-      basket.each {|item|
-        checkout.scan(item)
-      }
+      checkout.scan(@item2)
+      checkout.scan(@item3)
       checkout.total.should == 58.46
     end
 
@@ -132,7 +131,6 @@ describe Checkout, '#total' do
     # Total price expected: £73.76
 
     it "returns 73.76 with a basket of 001,002,001,003" do
-      item1,item2,item3 = catalogue
       basket = [@item1,@item2,@item1,@item3]
       basket.each {|item|
         checkout.scan(item)

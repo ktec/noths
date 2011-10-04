@@ -1,3 +1,11 @@
+4 October 2011
+
+Code written by Keith Salisbury using Redcar 0.11, Ubuntu 11.04.
+
+Product catalogue and promotion rules for the purposes of this 
+demonstration are defined in the checkout_spec module, this would 
+obviously be refactored and implemented differently in production.
+
 TEST::::::
 
 Notonthehighstreet is an online marketplace, here is a 
